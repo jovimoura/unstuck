@@ -1,23 +1,18 @@
-# fly.toml app configuration file generated for unstuck-api on 2025-07-31T15:20:37-03:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = 'unstuck-api'
 primary_region = 'gru'
 
 [http_service]
   internal_port = 80
   force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 1
+  auto_stop_machines = true   # para desligar quando não estiver em uso
+  auto_start_machines = true  # para ligar automaticamente quando alguém acessar
+  min_machines_running = 0    # IMPORTANTE! não mantenha sempre uma máquina ligada
   processes = ['app']
 
 [env]
   OPENAI_API_KEY = "your_openai_key_here"
 
 [[vm]]
-  memory = '1gb'
+  memory = '256mb'   # use o mínimo possível
   cpu_kind = 'shared'
   cpus = 1
